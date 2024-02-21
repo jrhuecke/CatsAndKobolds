@@ -23,7 +23,14 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintCallable)
+	void CreatePotion(float BrewTime);
+
 	UFUNCTION()
-	void CreatePotion();
+	void LaunchPotion();
+
+	void DecrementBrewingTimers(float DeltaTime);
+
+	TArray<float> BrewingTimers;
 
 };

@@ -27,7 +27,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void PickUpIngredient();
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere)
 	ACauldron* Cauldron;
-
 };

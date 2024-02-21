@@ -23,9 +23,34 @@ void ACauldron::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	DecrementBrewingTimers(DeltaTime);
+
 }
 
-void ACauldron::CreatePotion()
+void ACauldron::CreatePotion(float BrewTime)
+{
+	BrewingTimers.Add(BrewTime);
+}
+
+void ACauldron::DecrementBrewingTimers(float DeltaTime)
+{
+	int index = 0;
+	while (index < BrewingTimers.Num())
+	{
+		BrewingTimers[index] -= DeltaTime;
+		if (BrewingTimers[index] <= 0)
+		{
+			LaunchPotion();
+			BrewingTimers.RemoveAt(index);
+		}
+		else
+		{
+			index++;
+		}
+	}
+}
+
+void ACauldron::LaunchPotion()
 {
 
 }
