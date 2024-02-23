@@ -24,7 +24,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
-	void CreatePotion(float BrewTime);
+	void CreatePotion();
 
 	UFUNCTION()
 	void LaunchPotion();
@@ -32,5 +32,10 @@ public:
 	void DecrementBrewingTimers(float DeltaTime);
 
 	TArray<float> BrewingTimers;
+
+	UPROPERTY(EditAnywhere)
+	UStaticMesh* ProjMesh;
+
+	FTimerHandle TestTimer;
 
 };
