@@ -25,12 +25,4 @@ void AIngredient::Tick(float DeltaTime)
 
 }
 
-void AIngredient::PickUpIngredient()
-{
-	if (HasAuthority())
-	{
-		Cauldron->CreatePotion();
-		Destroy();
-	}
-}
 

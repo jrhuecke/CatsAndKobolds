@@ -23,19 +23,4 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(BlueprintCallable)
-	void CreatePotion();
-
-	UFUNCTION()
-	void LaunchPotion();
-
-	void DecrementBrewingTimers(float DeltaTime);
-
-	TArray<float> BrewingTimers;
-
-	UPROPERTY(EditAnywhere)
-	UStaticMesh* ProjMesh;
-
-	FTimerHandle TestTimer;
-
 };
