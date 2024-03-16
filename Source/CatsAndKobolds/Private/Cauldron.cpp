@@ -19,10 +19,6 @@ void ACauldron::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	if (HasAuthority())
-	{
-		GetWorld()->GetTimerManager().SetTimer(TestTimer, this, &ACauldron::CreatePotion, 2.0f, false);
-	}
 }
 
 // Called every frame
@@ -47,7 +43,7 @@ void ACauldron::DecrementBrewingTimers(float DeltaTime)
 		BrewingTimers[index] -= DeltaTime;
 		if (BrewingTimers[index] <= 0)
 		{
-			LaunchPotion();
+			//LaunchPotion();
 			BrewingTimers.RemoveAt(index);
 		}
 		else
@@ -57,31 +53,4 @@ void ACauldron::DecrementBrewingTimers(float DeltaTime)
 	}
 }
 
-void ACauldron::LaunchPotion()
-{
-	if (ProjMesh && HasAuthority())
-	{
-		FActorSpawnParameters SpawnParameters;
-		SpawnParameters.Owner = this;
-		AStaticMeshActor* StaticMeshActor = GetWorld()->SpawnActor<AStaticMeshActor>(SpawnParameters);
-		if (StaticMeshActor)
-		{
-			StaticMeshActor->SetReplicates(true);
-			StaticMeshActor->SetReplicateMovement(true);
-			StaticMeshActor->SetMobility(EComponentMobility::Movable);
-			FVector SpawnLocation = GetActorLocation() + GetActorUpVector() * 100.0f;
-			StaticMeshActor->SetActorLocation(SpawnLocation);
-			UStaticMeshComponent* StaticMeshComponent = StaticMeshActor->GetStaticMeshComponent();
-			if (StaticMeshComponent)
-			{
-				StaticMeshComponent->SetIsReplicated(true);
-				StaticMeshComponent->SetSimulatePhysics(true);
-				StaticMeshComponent->SetStaticMesh(ProjMesh);
-			}
-			
-			StaticMeshComponent->AddImpulse(FVector(FMath::RandRange(-30000, 30000), FMath::RandRange(-30000, 30000), 30000));
-			GetWorld()->GetTimerManager().SetTimer(TestTimer, this, &ACauldron::CreatePotion, 2.0f, false);
-		}
-	}
-}
 
